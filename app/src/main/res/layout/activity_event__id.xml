@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Event_ID">
+
+
+    <TextView
+        android:id="@+id/event_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ev_popup_label" />
+
+    <EditText
+        android:id="@+id/event_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/popupSave_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ev_popup_saveBtn" />
+</LinearLayout>
+

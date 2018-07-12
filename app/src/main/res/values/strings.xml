@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">QR Scanner</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">FXTM Seminars App</string>
+    <string name="nav_header_subtitle">Alpha version</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+
+    <!--Event popup -->
+    <string name="ev_popup_label">Please set-up Event ID</string>
+    <string name="ev_popup_saveBtn">Save data</string>
+    <!--Event popup -->
+
+    <!--Manual inputForm   -->
+    <string name="manual_Title">Please input Client ID of attender</string>
+    <string name="manual_MyFXTM_Label">MyFXTM ID: </string>
+    <string name="manual_submit">Save</string>
+    <!--Manual inputForm   -->
+
+
+    <!-- Fragment names -->
+    <string name="title_event_id">Choose Seminar ID</string>
+    <string name="title_clients_list">List of Attenders</string>
+    <string name="Myfxtimid">MyFXTM Client ID</string>
+
+
+
+    <!--List_item   -->
+    <string name="myfxtmid">MyFXTM ID</string>
+    <string name="clname">Client Name</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
