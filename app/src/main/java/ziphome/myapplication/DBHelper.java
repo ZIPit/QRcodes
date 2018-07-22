@@ -52,6 +52,77 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public int valiadate (String[] mas){
+       int result;
+       String clientid;
+       String seminarid;
+       int tmp;
+       String eventid_tmp;
+       result=0;
+       //Client id
+       clientid=mas[0];
+       seminarid=mas[3];
+       if (clientid.length()!=8) {
+           result = 1;  //Client ID is not correct
+           Log.d("validate","Clientid len");
+           return result;
+       }
+         else {
+           try {
+               tmp = Integer.parseInt(clientid);
+           }
+               catch (NumberFormatException e) {
+               result = 2;
+               Log.d("validate","Clientid number");
+               return result;
+           }
+       }
+        eventid_tmp=this.getEvent();
+       if (!seminarid.trim().equals(eventid_tmp.trim())) {
+           Log.d("validate","Seminar ID "+eventid_tmp+" and "+seminarid);
+           result = 3;
+           return result;
+       }
+
+        String cl_match;
+       cl_match=this.getclientbyID(clientid);
+       if (cl_match!=null)
+       {
+           if (cl_match!="") {
+               Log.d("validate","Clientid nonUnique");
+               result = 4;
+               return result;
+           }
+       }
+
+       return result;
+    } ;
+
+
+
+    public String getclientbyID(String clientid)
+    {
+        String cl_id;
+        cl_id="";
+        Log.d("validate","getclid_0");
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        Cursor cursor = database.rawQuery("SELECT * FROM "+ DBHelper.TABLE_CLIENTS + " WHERE Clientid=?",new String[]{clientid});
+       Log.d("validate","getclid_1");
+        if (cursor.moveToFirst()) {
+            int indexEv = cursor.getColumnIndex(DBHelper.CLIENTID);
+            cl_id = cursor.getString(indexEv);
+            Log.d("validate","getclid_11 "+cl_id);
+        }
+
+        cursor.close();
+        Log.d("validate","getclid_2");
+
+        return cl_id;
+    }
+
+
+
     public String addData(String[] mas, String mode){
 
         String clName;

@@ -21,7 +21,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -98,33 +100,73 @@ public class MainActivity extends AppCompatActivity
                     };
 
                     Log.d("AddMas",mas[0]+" "+mas[1]+" "+mas[2] );
-                    Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
 
                     DBHelper dbHelper;
                     dbHelper = new DBHelper(this);
                     String clName;
-                    clName= dbHelper.addData(mas,"0");
-                    if (clName!="") {
-                     //   Log.d("AddMas","222" );
-                        Log.d("Insert", "Client "+clName+" has been added Successfully");
-                        Toasty.success(this,"Inserted Successfully",Toast.LENGTH_SHORT).show();
-//                        imageView.setImageResource(R.drawable.okimg);
+                    final char dm = (char) 34;
+                    int res;
+                    res=0;
+                    res = dbHelper.valiadate(mas);
+                    if (res==0) {
+                        clName = dbHelper.addData(mas, "0");
+                        Log.d("Insert", "222 " + clName + "");
+                        if (clName != "") {
+                            //   Log.d("AddMas","222" );
+                            Log.d("Insert", dm + clName + dm + " has been added Successfully");
+                            //Toasty.success(this,"Client "+clName+" has been added Successfully",Toast.LENGTH_LONG).show();
+
+                            LayoutInflater inflater = getLayoutInflater();
+
+                            View toastLayout = inflater.inflate(R.layout.custom_toast, (ViewGroup) findViewById(R.id.showCustom));
+                            Toast toast = new Toast(getApplicationContext());
+                            toast.setDuration(Toast.LENGTH_LONG);
+                            TextView text = toastLayout.findViewById(R.id.tv_cust);
+                            text.setText(clName + " has been joined to Seminar ");
+                            toast.setView(toastLayout);
+
+                            toast.show();
+
+
+                            //                        imageView.setImageResource(R.drawable.okimg);
 //                        StatusTV.setText("has been added successfully");
 
+                        } else {
+                            Log.d("Insert", "Insert Failed");
+                            Toasty.error(this, "Insert Failed", Toast.LENGTH_SHORT).show();
+//
+                        }
                     }
-                    else {Log.d("Insert", "Insert Failed");
-                        Toasty.error(this,"Insert Failed",Toast.LENGTH_SHORT).show();
-//                        imageView.setImageResource(R.drawable.failure);
-//                        StatusTV.setText("Oops :( Scan failed");
-                    }
+                    else
+                        {
+                            Log.d("validate","is "+ res);
+                            switch (res) {
+                                case 1 :
+                                    Toasty.error(this, "Failed. Client ID number is invalid", Toast.LENGTH_LONG).show();
+                                    break;
+                                case 2 :
+                                    Toasty.error(this, "Failed. Client ID number is not a number", Toast.LENGTH_LONG).show();
+                                case 3 :
+                                    Toasty.error(this, "Failed. Seminar ID from QR code is not Matched with Current Seminar ID", Toast.LENGTH_LONG).show();
+                                    break;
+                                case 4 :
+                                    Toasty.error(this, "Failed. Client with MyFXTM ID "+mas[0]+" is alredy joined to Seminar",Toast.LENGTH_LONG).show();
+                                    break;
+                            }
+                        }
 
 
 
 
+                } catch (JSONException e) {
+                    Log.d("Insert","333");
+                    Toasty.error(this,"Insert Failed. QR code has Invalid structure",Toast.LENGTH_SHORT).show();
 
-                } catch (JSONException e) { e.printStackTrace(); }
+                    e.printStackTrace(); }
             }
         } else {
+            Log.d("Insert","444");
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
