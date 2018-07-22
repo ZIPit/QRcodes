@@ -254,52 +254,10 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.event_id) {
 
-//            LayoutInflater li = LayoutInflater.from(this);
-//            View promptsView = li.inflate(R.layout.eventid, null);
-//            AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this);
-//            mDialogBuilder.setView(promptsView);
-//            EditText userInput = (EditText) promptsView.findViewById(R.id.et_eventid);
-//
-//
-//            mDialogBuilder
-//                    .setCancelable(false)
-//                    .setPositiveButton("OK",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog,int id) {
-//
-//
-//                                }
-//                            })
-//                    .setNegativeButton("Cancel",
-//                            new DialogInterface.OnClickListener() {
-//                                public void onClick(DialogInterface dialog,int id) {
-//                                    dialog.cancel();
-//                                }
-//                            });
-//
-//            AlertDialog alertDialog = mDialogBuilder.create();
-//
-//
-//            alertDialog.show();
-
-
-
-
-//            DialogFragment dialogFragment= new DialogFragment();
-//            FragmentTransaction ft = getFragmentManager().beginTransaction();
-//            dialogFragment.show(ft, "dialog");
-
-
-
-
-
-
-
-
 
             Intent intent = new Intent(MainActivity.this, Event_ID.class);
             startActivity(intent);
-            Toast.makeText(this,"event_id",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this,"event_id",Toast.LENGTH_SHORT).show();
             // Handle the camera action
         } else if (id == R.id.attenders) {
 
@@ -312,12 +270,12 @@ public class MainActivity extends AppCompatActivity
                     clientsListFragment).commit();
             Log.d("jalo","onNavigationItemSelected ");
 
-            Toast.makeText(this,"Attenders",Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(this,"Attenders",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.insert_client) {
             Intent intent = new Intent(MainActivity.this, Man_ClInsert_activity.class);
             startActivity(intent);
 
-            Toast.makeText(this,"Insert Client",Toast.LENGTH_SHORT).show();
+  //          Toast.makeText(this,"Insert Client",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_manage) {
             Tools toolsFragment = new Tools();
             FragmentManager manager = getSupportFragmentManager();
