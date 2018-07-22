@@ -17,12 +17,15 @@ public class Event_ID extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_event__id);
         getSupportActionBar().setTitle(R.string.title_event_id);
 
         DisplayMetrics dm = new DisplayMetrics();
 
         Button save_btn;
+
+
 
 
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -34,6 +37,7 @@ public class Event_ID extends AppCompatActivity {
         save_btn=(Button) findViewById(R.id.popupSave_btn);
         seminarID= (EditText) findViewById(R.id.event_edit);
         dbHelper = new DBHelper(this);
+
         seminarID.setText(dbHelper.getEvent());
 
         View.OnClickListener saveListener = new View.OnClickListener() {

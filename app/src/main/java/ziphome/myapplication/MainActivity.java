@@ -1,13 +1,17 @@
 package ziphome.myapplication;
 
+import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -24,6 +29,8 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -95,15 +102,18 @@ public class MainActivity extends AppCompatActivity
 
                     DBHelper dbHelper;
                     dbHelper = new DBHelper(this);
-
-                    if (dbHelper.addData(mas,"0")) {
+                    String clName;
+                    clName= dbHelper.addData(mas,"0");
+                    if (clName!="") {
                      //   Log.d("AddMas","222" );
-                        Log.d("Insert", "Inserted Successfully");
+                        Log.d("Insert", "Client "+clName+" has been added Successfully");
+                        Toasty.success(this,"Inserted Successfully",Toast.LENGTH_SHORT).show();
 //                        imageView.setImageResource(R.drawable.okimg);
 //                        StatusTV.setText("has been added successfully");
 
                     }
                     else {Log.d("Insert", "Insert Failed");
+                        Toasty.error(this,"Insert Failed",Toast.LENGTH_SHORT).show();
 //                        imageView.setImageResource(R.drawable.failure);
 //                        StatusTV.setText("Oops :( Scan failed");
                     }
@@ -122,11 +132,44 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
+            //Toast.makeText(this,"onBackPressed",Toast.LENGTH_SHORT).show();
             drawer.closeDrawer(GravityCompat.START);
+
+
         } else {
-            super.onBackPressed();
+            //Toast.makeText(this,"onBackPressed2",Toast.LENGTH_SHORT).show();
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            alert.setTitle("Exit");
+            alert.setMessage("Are you sure you want to quit?");
+
+            alert.setPositiveButton("Exit", new DialogInterface.OnClickListener()
+                    {
+
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                          //  super.onBackPressed();
+                            finish();
+
+                        }
+                    }
+
+            );
+            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();;
+                }
+            });
+            AlertDialog al = alert.create();
+            al.show();
+
+
         }
     }
 
@@ -154,6 +197,10 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+
+
+
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -164,6 +211,49 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.event_id) {
+
+//            LayoutInflater li = LayoutInflater.from(this);
+//            View promptsView = li.inflate(R.layout.eventid, null);
+//            AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this);
+//            mDialogBuilder.setView(promptsView);
+//            EditText userInput = (EditText) promptsView.findViewById(R.id.et_eventid);
+//
+//
+//            mDialogBuilder
+//                    .setCancelable(false)
+//                    .setPositiveButton("OK",
+//                            new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog,int id) {
+//
+//
+//                                }
+//                            })
+//                    .setNegativeButton("Cancel",
+//                            new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog,int id) {
+//                                    dialog.cancel();
+//                                }
+//                            });
+//
+//            AlertDialog alertDialog = mDialogBuilder.create();
+//
+//
+//            alertDialog.show();
+
+
+
+
+//            DialogFragment dialogFragment= new DialogFragment();
+//            FragmentTransaction ft = getFragmentManager().beginTransaction();
+//            dialogFragment.show(ft, "dialog");
+
+
+
+
+
+
+
+
 
             Intent intent = new Intent(MainActivity.this, Event_ID.class);
             startActivity(intent);

@@ -26,10 +26,17 @@
     <string name="Myfxtimid">MyFXTM Client ID</string>
 
 
-
     <!--List_item   -->
     <string name="myfxtmid">MyFXTM ID</string>
     <string name="clname">Client Name</string>
+
+
+    <!-- Dialog alerts -->
+    <string name="list_empty_t">:/</string>
+    <string name="list_empty_bd">List of attendeers is empty for now</string>
+    <string name="list_empty_btn">OK, Clear</string>
+    <!-- Dialog alerts -->
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

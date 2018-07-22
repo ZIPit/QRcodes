@@ -52,7 +52,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean addData(String[] mas, String mode){
+    public String addData(String[] mas, String mode){
+
+        String clName;
+
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -63,9 +66,12 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(DBHelper.MODE, mode);
         long result = database.insert(DBHelper.TABLE_CLIENTS,null,  contentValues);
         if (result==-1){
-            return false;
+          clName="";
         }
-        else return true;
+        else clName=mas[1];
+
+
+        return clName;
     };
 
     public String getEvent(){
