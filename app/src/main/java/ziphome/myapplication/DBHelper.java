@@ -52,6 +52,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    public void clear_clientsData (){
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.execSQL("DELETE FROM "+TABLE_CLIENTS);
+    }
+
     public int valiadate (String[] mas){
        int result;
        String clientid;
@@ -77,7 +82,13 @@ public class DBHelper extends SQLiteOpenHelper {
                return result;
            }
        }
+
         eventid_tmp=this.getEvent();
+       if(eventid_tmp == null || eventid_tmp.isEmpty())
+       {
+           result = 5;
+           return result;
+       }
        if (!seminarid.trim().equals(eventid_tmp.trim())) {
            Log.d("validate","Seminar ID "+eventid_tmp+" and "+seminarid);
            result = 3;

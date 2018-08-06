@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     android:orientation="vertical"
-    tools:context=".Clientslist_fragment">
+    tools:context=".Fragments.Clientslist_fragment">
 
     <!-- TODO: Update blank fragment layout -->
 

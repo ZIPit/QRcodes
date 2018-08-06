@@ -5,17 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Event_ID">
+    tools:context=".Activities.Event_ID"
+    android:padding="@dimen/activity_horizontal_margin">
 
 
     <TextView
         android:id="@+id/event_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:paddingBottom="20dp"
         android:text="@string/ev_popup_label" />
 
     <EditText
         android:id="@+id/event_edit"
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"

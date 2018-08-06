@@ -17,35 +17,56 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="@dimen/activity_horizontal_margin">
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+            <!--android:padding="@dimen/activity_horizontal_margin">-->
 
 
-            <TextView
-                android:id="@+id/tvMyfxtmid"
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:layout_weight="2"
-                android:text="Myfxtmid"
-                android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvMyfxtmid"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Myfxtmid"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="Email"
+                    android:textSize="10sp"
+                    tools:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvClName"
-                android:layout_width="280dp"
-                android:layout_height="33dp"
-                android:layout_weight="1"
-                android:text="Client name"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tvEmail"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:layout_weight="2"
-                android:text="Email"
-                android:textSize="18sp" />
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                 />
+
+
             <!--<TextView-->
             <!--android:id="@+id/tvEventID"-->
             <!--android:layout_width="match_parent"-->
@@ -54,7 +75,9 @@
             <!--android:text="CEventID"-->
             <!--android:textSize="18sp" />-->
 
+
         </LinearLayout>
+
     </android.support.v7.widget.CardView>
 
 

@@ -1,4 +1,4 @@
-package ziphome.myapplication;
+package ziphome.myapplication.Fragments;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.zip.Inflater;
+
+import ziphome.myapplication.DBHelper;
+import ziphome.myapplication.R;
 
 public class DialogFragment extends android.app.DialogFragment {
     DBHelper dbHelper;
