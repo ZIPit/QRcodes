@@ -9,7 +9,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="75dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         app:cardBackgroundColor="@android:color/background_light"
@@ -17,54 +17,106 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="80dp"
             android:orientation="horizontal">
             <!--android:padding="@dimen/activity_horizontal_margin">-->
 
 
-            <LinearLayout
-                android:layout_width="120dp"
+            <TextView
+                android:id="@+id/tvRowid"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/nn_sample"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="10"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvMyfxtmid"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="Myfxtmid"
-                    android:textSize="16sp" />
+                    android:layout_height="35dp"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvEmail"
+                    <TextView
+                        android:id="@+id/tvClName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center_vertical"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Email"
-                    android:textSize="10sp"
-                    tools:layout_height="wrap_content" />
+                    android:layout_height="2dp"
+                    android:background="@android:color/darker_gray">
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="63dp"
+                        android:layout_height="wrap_content"
+                        android:text="Client ID:"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvMyfxtmid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/myfxtmid_sample"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="45dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Type:"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvClType"
+                        android:layout_width="85dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/clType_sample"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tvEmail"-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="@string/email_sample"-->
+                    <!--android:textSize="12sp"-->
+                    <!--tools:layout_height="wrap_content" />-->
+                </LinearLayout>
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvClName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                 />
 
 
             <!--<TextView-->

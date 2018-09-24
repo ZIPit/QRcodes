@@ -5,32 +5,35 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AlertDialogLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import ziphome.myapplication.Activities.MainActivity;
 import ziphome.myapplication.ClListAdapter;
 import ziphome.myapplication.ClientData;
 import ziphome.myapplication.DBHelper;
+import ziphome.myapplication.MyAttendeeInterface;
 import ziphome.myapplication.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Clientslist_fragment extends Fragment {
+public class Clientslist_fragment extends Fragment  {
 
     View v;
     private RecyclerView myRecyclerView;
+
     private ArrayList<ClientData> listCldata;
 
     @Override
@@ -49,14 +52,17 @@ public class Clientslist_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              Bundle savedInstanceState) {
-
+        v = inflater.inflate(R.layout.clientslist_fragment, container, false);
         DBHelper dbHelper;
         dbHelper = new DBHelper(getContext());
         ArrayList<ClientData> listCldata ;
         listCldata = new ArrayList<>();
+        TextView tvEventid = (TextView) v.findViewById(R.id.tvEventid);
+        tvEventid.setText(dbHelper.getEvent());
 
         Log.d("listview_track","before");
         listCldata= dbHelper.clientlistview();
+
         if  ( listCldata.isEmpty())
         {Log.d("track_null", "null list");
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -74,18 +80,22 @@ public class Clientslist_fragment extends Fragment {
 
         }
         else {
+//            FragmentIntentIntegrator integrator = new FragmentIntentIntegrator(Clientslist_fragment.this);
+//            integrator.setBeepEnabled(false);
+//            integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+//            integrator.setPrompt("Let's Go!");
+//            integrator.initiateScan();
 
             Log.d("listview_track", "after" + listCldata.get(0).getMyfxtm_id());
 
 
-            v = inflater.inflate(R.layout.clientslist_fragment, container, false);
+
 
             myRecyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
-            ClListAdapter recycleradapter = new ClListAdapter(getContext(), listCldata);
+           // ClListAdapter recycleradapter = new ClListAdapter(getContext(), listCldata);
             myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             myRecyclerView.setAdapter(new ClListAdapter(getContext(), listCldata));
         }
-
 
 
 
@@ -93,5 +103,32 @@ public class Clientslist_fragment extends Fragment {
 
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        DBHelper dbHelper;
+        dbHelper = new DBHelper(getContext());
+        listCldata= dbHelper.clientlistview();
+       // if (!listCldata.isEmpty()&&this.myRecyclerView!=null) {
+        if (!listCldata.isEmpty()&&this.myRecyclerView!=null) {
+            this.myRecyclerView.setAdapter(new ClListAdapter(getContext(), listCldata));
+        }
+        else if (!listCldata.isEmpty()&&this.myRecyclerView==null){
+            //this.myRecyclerView.setAdapter(new ClListAdapter(getContext(), listCldata));
+
+            Clientslist_fragment clientsListFragment = new Clientslist_fragment();
+            FragmentManager manager = this.getFragmentManager();
+            manager.beginTransaction().replace(R.id.relativeLayoutforfragment,
+                    clientsListFragment,"clfrag").commit();
+
+           // recycleradapter.refreshClList();
+
+        }
+
+
+
+    }
+
 
 }

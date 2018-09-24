@@ -1,11 +1,21 @@
 package ziphome.myapplication;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import ziphome.myapplication.Activities.MainActivity;
+import ziphome.myapplication.Fragments.Clientslist_fragment;
+import ziphome.myapplication.other.AlertCust;
 
 public class Man_ClInsert_activity extends AppCompatActivity {
     EditText clientidET ;
@@ -24,18 +34,41 @@ public class Man_ClInsert_activity extends AppCompatActivity {
                 Log.d("checkman","0: "+clientidET.getText().length());
                 if (clientidET.getText().length()>0){
                     String clientid= clientidET.getText().toString();
-                    String[] mas = new String[]{
-                            clientid,
-                            "Client " + clientid,
-                            "EMail is unknown" ,
-                            dbHelper.getEvent()
+                    String date;
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 
-                    };
-                    Log.d("checkman", "1: ");
-                    dbHelper.addData(mas,"1");
-                    //dbHelper.manualInput(dbHelper.getEvent(),clientidET.getText().toString());
+                    date = format.format(new Date());
+                    CheckBox checkBox = findViewById(R.id.checkBox);
+                    String checkbox_val = "client";
+                    if (checkBox.isChecked()) {
+                        checkbox_val = "partner";
+                    }
+                    String str = dbHelper.getEvent();
+                   if (str==null || str.equals(""))
+                    {
 
-                    finish();
+                        AlertCust alertCust = new AlertCust();
+                        Log.d("manemptydata","manemptydata");
+                        alertCust.Show("event_empty", Man_ClInsert_activity.this);
+                    }
+                    else {
+                       String[] mas = new String[]{
+                               clientid,
+                               "Client " + clientid,
+                               "EMail is unknown",
+                               dbHelper.getEvent(),
+                               checkbox_val,
+                               date
+
+                       };
+                       Log.d("checkman", "1: ");
+                       dbHelper.addData(mas, "1");
+
+                       //dbHelper.manualInput(dbHelper.getEvent(),clientidET.getText().toString());
+                       //Toast.makeText(Man_ClInsert_activity.this,date, Toast.LENGTH_LONG).show();
+
+                       finish();
+                   }
                 }
             }
         };

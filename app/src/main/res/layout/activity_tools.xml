@@ -14,4 +14,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="72dp"
         android:text="Remove clients data" />
+
+    <Button
+        android:id="@+id/btn_remevid"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="146dp"
+        android:text="Remove event ID" />
 </RelativeLayout>

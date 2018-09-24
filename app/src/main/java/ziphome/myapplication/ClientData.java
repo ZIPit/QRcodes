@@ -8,12 +8,16 @@ public class ClientData {
     String clName;
     String eMail;
     String seminarID;
+    int idIndex;
+    String extType;
 
-    public ClientData(String myfxtm_id, String clName, String eMail, String seminarID) {
+    public ClientData(String myfxtm_id, String clName, String eMail, String seminarID, int idIndex, String extType) {
         this.myfxtm_id = myfxtm_id;
         this.clName = clName;
         this.eMail = eMail;
         this.seminarID = seminarID;
+        this.idIndex =  idIndex;
+        this.extType = extType;
     }
 
     public String getMyfxtm_id() {
@@ -30,6 +34,12 @@ public class ClientData {
 
     public String getSeminarID() {
         return seminarID;
+    }
+    public String getIdIndex(){
+        return Integer.toString(idIndex);
+    }
+    public String getExtType() {
+        return extType;
     }
 
 }

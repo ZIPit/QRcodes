@@ -9,14 +9,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
+import ziphome.myapplication.ClientData;
 import ziphome.myapplication.DBHelper;
 import ziphome.myapplication.R;
+import ziphome.myapplication.other.AlertCust;
 
 public class Event_ID extends AppCompatActivity {
     EditText seminarID;
     String seminarValue;
+    String eventID_init;
+
 
     DBHelper dbHelper;
     @Override
@@ -44,8 +49,8 @@ public class Event_ID extends AppCompatActivity {
         save_btn=(Button) findViewById(R.id.popupSave_btn);
         seminarID= (EditText) findViewById(R.id.event_edit);
         dbHelper = new DBHelper(this);
-
-        seminarID.setText(dbHelper.getEvent());
+        eventID_init = dbHelper.getEvent();
+        seminarID.setText(eventID_init);
 
         View.OnClickListener saveListener = new View.OnClickListener() {
             @Override
@@ -54,21 +59,45 @@ public class Event_ID extends AppCompatActivity {
                 Log.d("EventIDtrack", "Event ID data " + seminarID.getText().length());
                 if (seminarID.getText().length()>0){
 
-                    if (dbHelper.setEvent(seminarValue))
-                    {
-                        Log.d("EventIDtrack","Updated Successfully");
-                        finish();
-                    }
-                    else {
-                        Log.d("EventIDtrack","Updated Failed");
-                    }
+
+
+                        ArrayList<ClientData> listCldata;
+                        listCldata= dbHelper.clientlistview();
+                        if (listCldata.isEmpty()) {
+
+                            if (dbHelper.setEvent(seminarValue)) {
+                                Log.d("EventIDtrack", "Updated Successfully");
+                                finish();
+                            }
+                            else {
+                                Log.d("EventIDtrack", "Updated Failed");
+                            }
+                        }
+                        else {
+
+                            if (!eventID_init.equals(seminarValue)) {
+
+                            String title;
+                            String msg;
+                            title= "Oops";
+                            msg= "Event ID can't be changed until Attendees list be empty";
+                            AlertCust alertCust = new AlertCust();
+                            alertCust.Show(title, msg, Event_ID.this);
+                        }
+                            else  finish();
+
+                        }
+
+
+
                 };
 
-            }
+            };
         };
-        save_btn.setOnClickListener(saveListener);
+         save_btn.setOnClickListener(saveListener);
+
 
     }
 
 
-}
+};

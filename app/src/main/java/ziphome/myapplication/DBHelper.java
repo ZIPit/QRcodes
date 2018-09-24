@@ -8,10 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
+
+import ziphome.myapplication.models.Attendee;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "DBclients";
     public static final String TABLE_CLIENTS = "clients";
 
@@ -23,9 +26,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String MODE = "Mode";  // 0 - automatic insert , 1 - manual insert
 
+    public static final String EXTERNAL_TYPE = "Ext_type";
 
     public static final String TABLE_EVENT = "event";
     public static final String EVENTID = "Eventid";
+    public static final String DATE_INS = "date_ins";
+
 
 
     public DBHelper(Context context) {
@@ -36,7 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table "+TABLE_CLIENTS+"("+ KEYID +
                 " integer primary key,"+ CLIENTID +" text,"+ CLIENTNAME +" text," + EMAIL + " text, " +
-                SEMINARID +" text," +MODE+" text)"
+                SEMINARID +" text," +MODE+" text,"+ EXTERNAL_TYPE +" text,"+ DATE_INS+" text)"
         );
         db.execSQL("create table "+TABLE_EVENT+"("+ KEYID +
                 " integer primary key,"+ EVENTID +" text)"
@@ -56,6 +62,12 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getWritableDatabase();
         database.execSQL("DELETE FROM "+TABLE_CLIENTS);
     }
+
+    public void clear_eventid(){
+        SQLiteDatabase database = this.getWritableDatabase();
+        database.execSQL("DELETE FROM "+TABLE_EVENT);
+    }
+
 
     public int valiadate (String[] mas){
        int result;
@@ -146,6 +158,8 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(DBHelper.EMAIL, mas[2]);
         contentValues.put(DBHelper.SEMINARID, mas[3]);
         contentValues.put(DBHelper.MODE, mode);
+        contentValues.put(DBHelper.EXTERNAL_TYPE,mas[4]);
+        contentValues.put(DBHelper.DATE_INS,mas[5]);
         long result = database.insert(DBHelper.TABLE_CLIENTS,null,  contentValues);
         if (result==-1){
           clName="";
@@ -205,7 +219,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
         SQLiteDatabase database = this.getWritableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * FROM "+DBHelper.TABLE_CLIENTS, null);
+        Cursor cursor = database.rawQuery("SELECT * FROM "+DBHelper.TABLE_CLIENTS+" ORDER BY ROWID DESC", null);
 
         if (cursor.moveToFirst()){
             int idIndex = cursor.getColumnIndex(DBHelper.KEYID);
@@ -213,13 +227,18 @@ public class DBHelper extends SQLiteOpenHelper {
             int clNameIndex = cursor.getColumnIndex(DBHelper.CLIENTNAME);
             int emailIndex = cursor.getColumnIndex(DBHelper.EMAIL);
             int semidIndex = cursor.getColumnIndex(DBHelper.SEMINARID);
+            int ExtTypeIndex = cursor.getColumnIndex(DBHelper.EXTERNAL_TYPE);
+
 
             do {
                 cldata = new ClientData(
                         cursor.getString(cliIDIndex),
                         cursor.getString(clNameIndex),
                         cursor.getString(emailIndex),
-                        cursor.getString(semidIndex)
+                        cursor.getString(semidIndex),
+                        cursor.getInt(idIndex),
+                        cursor.getString(ExtTypeIndex)
+
                 );
                 arrayList.add(cldata);
                 Log.d("DBRead","KEYID "+ cursor.getInt(idIndex) + ", CLIENTNAME = " + cursor.getString(clNameIndex)+"");
@@ -233,6 +252,48 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return arrayList;
     }
+
+    public ArrayList<Attendee> ClData4EP() {
+
+        ArrayList<Attendee> arrayList;
+        arrayList = new ArrayList();
+        Attendee cldata;
+
+
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM "+DBHelper.TABLE_CLIENTS, null);
+
+        if (cursor.moveToFirst()){
+            int idIndex = cursor.getColumnIndex(DBHelper.KEYID);
+            int cliIDIndex = cursor.getColumnIndex(DBHelper.CLIENTID);
+            int clNameIndex = cursor.getColumnIndex(DBHelper.CLIENTNAME);
+            int emailIndex = cursor.getColumnIndex(DBHelper.EMAIL);
+            int semidIndex = cursor.getColumnIndex(DBHelper.SEMINARID);
+            int ExtTypeIndex = cursor.getColumnIndex(DBHelper.EXTERNAL_TYPE);
+
+            do {
+                cldata = new Attendee (
+                        cursor.getString(semidIndex),
+                        cursor.getString(cliIDIndex),
+                        cursor.getString(ExtTypeIndex),
+                        "2018-07-20T12:16:51+00:00",
+                        true);
+
+                arrayList.add(cldata);
+                Log.d("DBRead","KEYID "+ cursor.getInt(idIndex) + ", CLIENTNAME = " + cursor.getString(clNameIndex)+"");
+
+            }
+            while (cursor.moveToNext());
+
+        }
+        else Log.d("DBRead","0 Rows");
+
+        cursor.close();
+        return arrayList;
+    }
+
+
+
 
     public String[] showlastClient(){
         String[] mas;

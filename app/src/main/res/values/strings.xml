@@ -14,7 +14,7 @@
     <!--Event popup -->
 
     <!--Manual inputForm   -->
-    <string name="manual_Title">Please input Client ID of attender</string>
+    <string name="manual_Title">Please input Client ID of attendee</string>
     <string name="manual_MyFXTM_Label">MyFXTM ID: </string>
     <string name="manual_submit">Save</string>
     <!--Manual inputForm   -->
@@ -22,7 +22,7 @@
 
     <!-- Fragment names -->
     <string name="title_event_id">Choose Seminar ID</string>
-    <string name="title_clients_list">List of Attenders</string>
+    <string name="title_clients_list">List of Attendees</string>
     <string name="Myfxtimid">MyFXTM Client ID</string>
 
 
@@ -33,14 +33,21 @@
 
     <!-- Dialog alerts -->
     <string name="list_empty_t">:/</string>
-    <string name="list_empty_bd">List of attendeers is empty for now</string>
+    <string name="list_empty_bd">List of attendees is empty for now</string>
     <string name="list_empty_btn">OK, Clear</string>
     <!-- Dialog alerts -->
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="login">Login</string>
+    <string name="login">Authorization</string>
     <string name="password">Password</string>
-    <string name="login2">Login</string>
+    <string name="login2">Send Data to FXTM</string>
+    <string name="emptydata_msg_title">Oops..</string>
+    <string name="emptydata_msg">No attendees data found. Nothing to send for now</string>
+    <string name="email_sample">Email</string>
+    <string name="clType_sample">Client</string>
+    <string name="myfxtmid_sample">Myfxtmid</string>
+    <string name="nn_sample">11</string>
+    <string name="title_activity_attendee_item">Attendee_item</string>
 </resources>
