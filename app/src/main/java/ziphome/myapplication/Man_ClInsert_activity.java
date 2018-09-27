@@ -1,5 +1,6 @@
 package ziphome.myapplication;
 
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +10,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import ziphome.myapplication.Activities.MainActivity;
 import ziphome.myapplication.Fragments.Clientslist_fragment;
@@ -62,7 +65,7 @@ public class Man_ClInsert_activity extends AppCompatActivity {
 
                        };
                        Log.d("checkman", "1: ");
-                       dbHelper.addData(mas, "1");
+                       dbHelper.addData(mas, "true");
 
                        //dbHelper.manualInput(dbHelper.getEvent(),clientidET.getText().toString());
                        //Toast.makeText(Man_ClInsert_activity.this,date, Toast.LENGTH_LONG).show();
@@ -73,7 +76,16 @@ public class Man_ClInsert_activity extends AppCompatActivity {
             }
         };
         submitBtn.setOnClickListener(submitBTN);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
 
 
     }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+
 }

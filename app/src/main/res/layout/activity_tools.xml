@@ -13,6 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="72dp"
+        android:editable="true"
         android:text="Remove clients data" />
 
     <Button
@@ -22,5 +23,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="146dp"
+        android:enabled="true"
         android:text="Remove event ID" />
 </RelativeLayout>

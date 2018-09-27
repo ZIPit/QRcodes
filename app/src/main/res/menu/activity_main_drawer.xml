@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/event_id"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/compass"
             android:title="Set-up Event ID" />
         <item
             android:id="@+id/attenders"

@@ -83,7 +83,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/hortensia"
                     android:paddingRight="10dp"
-                    android:text="3. Send data in the end of seminar to CRM"
+                    android:text="3. Send data in the end of \n seminar to CRM"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
             </LinearLayout>

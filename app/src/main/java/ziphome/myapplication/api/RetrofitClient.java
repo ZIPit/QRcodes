@@ -5,8 +5,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-  // private static final String BASE_URL = "http://seminars.go.fxtm.com/v1/";
-     private static final String BASE_URL = "https://seminars.trunk.fxtm/v1/";
+   //  private static final String BASE_URL = "http://seminars.go.fxtm.com/v1/";
+   private static final String BASE_URL = "https://seminars.trunk.fxtm/v1/";
    //private static final String BASE_URL = "https://yandex.ru/v1/";
 
 

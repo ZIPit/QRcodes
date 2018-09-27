@@ -12,6 +12,8 @@ import java.util.Date;
 
 import ziphome.myapplication.models.Attendee;
 
+import static java.lang.Boolean.*;
+
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 3;
@@ -270,6 +272,8 @@ public class DBHelper extends SQLiteOpenHelper {
             int emailIndex = cursor.getColumnIndex(DBHelper.EMAIL);
             int semidIndex = cursor.getColumnIndex(DBHelper.SEMINARID);
             int ExtTypeIndex = cursor.getColumnIndex(DBHelper.EXTERNAL_TYPE);
+            int ModeIndex = cursor.getColumnIndex(DBHelper.MODE);
+
 
             do {
                 cldata = new Attendee (
@@ -277,7 +281,8 @@ public class DBHelper extends SQLiteOpenHelper {
                         cursor.getString(cliIDIndex),
                         cursor.getString(ExtTypeIndex),
                         "2018-07-20T12:16:51+00:00",
-                        true);
+                        cursor.getString(ModeIndex)
+                        );
 
                 arrayList.add(cldata);
                 Log.d("DBRead","KEYID "+ cursor.getInt(idIndex) + ", CLIENTNAME = " + cursor.getString(clNameIndex)+"");

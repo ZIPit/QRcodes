@@ -69,10 +69,16 @@ public class Clientslist_fragment extends Fragment  {
             builder.setTitle(R.string.list_empty_t);
             builder.setMessage(R.string.list_empty_bd);
             builder.setCancelable(false);
+            final Home_fragment home_fragment = new Home_fragment();
+            final FragmentManager manager = this.getFragmentManager();
             builder.setNegativeButton(R.string.list_empty_btn, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
+
                     dialogInterface.cancel();
+
+                    manager.beginTransaction().replace(R.id.relativeLayoutforfragment,
+                            home_fragment,"clfrag").commit();
                 }
             });
             builder.show();

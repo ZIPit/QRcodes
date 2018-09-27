@@ -61,6 +61,7 @@ import ziphome.myapplication.models.Attendee;
 import ziphome.myapplication.models.AttendeeResp;
 import ziphome.myapplication.models.AuthResponse;
 import ziphome.myapplication.other.AlertCust;
+import ziphome.myapplication.other.CaptureActivityPortrait;
 import ziphome.myapplication.other.FragmentIntentIntegrator;
 
 public class MainActivity extends AppCompatActivity
@@ -107,9 +108,10 @@ public class MainActivity extends AppCompatActivity
                 else {
 
                     IntentIntegrator qrScan = new IntentIntegrator(MainActivity.this);
-
+                    qrScan.setOrientationLocked(true);
                     qrScan.setBeepEnabled(false);
                     qrScan.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+                    qrScan.setCaptureActivity(CaptureActivityPortrait.class);
                     qrScan.setPrompt("Let's Go!");
                     qrScan.initiateScan();
                 }
@@ -192,7 +194,7 @@ public class MainActivity extends AppCompatActivity
                 Log.d("AddMas", "starting3..");
                 res = dbHelper.valiadate(mas);
                 if (res == 0) {
-                    clName = dbHelper.addData(mas, "0");
+                    clName = dbHelper.addData(mas, "false");
                     Log.d("Insert", "222 " + clName + "");
                     if (!clName.equals("")) {
                         //   Log.d("AddMas","222" );
@@ -360,8 +362,33 @@ public class MainActivity extends AppCompatActivity
   //          Toast.makeText(this,"Insert Client",Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_manage) {
 
-            Intent intent = new Intent(MainActivity.this, ToolsActivity.class);
-            startActivity(intent);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            View mView = getLayoutInflater().inflate(R.layout.toolspwd_layout,null);
+            final EditText mpassword = (EditText) mView.findViewById(R.id.tools_password);
+            final Button pwdbutton = (Button) mView.findViewById(R.id.pwdbtn_login);
+
+            builder.setView(mView);
+            final AlertDialog dialog = builder.create();
+
+            pwdbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mpassword.getText().toString().equals("123")) {
+                        dialog.dismiss();
+                        Intent intent = new Intent(MainActivity.this, ToolsActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        AlertCust alertCust = new AlertCust();
+                        alertCust.Show("wrong_pwd", MainActivity.this);
+                    }
+                }
+            }
+            );
+            dialog.show();
+
+
+
 
 
           //  Toast.makeText(this,"nav_manage",Toast.LENGTH_SHORT).show();

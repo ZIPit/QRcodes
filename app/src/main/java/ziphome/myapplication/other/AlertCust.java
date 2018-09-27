@@ -33,6 +33,11 @@ public class AlertCust {
                 title = "Event ID is empty";
                 message = "Please set-up Event ID";
             }
+            else if (type == "wrong_pwd")
+            {
+                title = "Oops..";
+                message = "Wrong password. Sorry :(";
+            }
             if (!title.equals("")) {
                 dial.setTitle(title);
                 dial.setMessage(message);
